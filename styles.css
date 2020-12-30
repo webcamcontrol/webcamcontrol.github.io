@@ -11,7 +11,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: xx-large;
+    font-size: 72px;
     margin: 4px 2px;
     transition-duration: 0.4s;
     /*cursor: pointer;*/
