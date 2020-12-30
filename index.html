@@ -1,0 +1,52 @@
+<DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="./styles.css">
+
+    <button id="button" onmousedown="MouseLeft()" onmouseup="unMouseLeft()">Left</button>
+    <button id="button" onmousedown="MouseRight()" onmouseup="unMouseRight()">Right</button>
+
+    <p id="p1">nothing to see here</p>
+
+    <script>
+
+        function MouseLeft() {
+            document.getElementById("p1").innerHTML = "Mouse over left";
+            sendToCam("D16", 1);
+        }
+        function unMouseLeft() {
+            document.getElementById("p1").innerHTML = "mouse off left";
+            sendToCam("D16", 0);
+        }
+        function MouseRight() {
+            document.getElementById("p1").innerHTML = "mouse on right";
+            sendToCam("D12", 1);
+        }
+        function unMouseRight() {
+            document.getElementById("p1").innerHTML = "mouse off right";
+            sendToCam("D12", 0);
+        }
+    
+        function sendToCam (pin, value) {
+            var request = new XMLHttpRequest();
+
+            var requestAdd = "http://blynk-cloud.com/" + "Fz_G6g9PLEoxASiq9pquOX2g94jty4AJ" + "/update/" + pin + "?value=" + value
+
+            request.open('GET', requestAdd);
+
+            request.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                console.log('Status:', this.status);
+                console.log('Headers:', this.getAllResponseHeaders());
+                console.log('Body:', this.responseText);
+            }
+            };
+
+            request.send();
+        }
+
+    </script>
+
+
+</html>
+
