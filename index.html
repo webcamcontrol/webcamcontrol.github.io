@@ -3,12 +3,29 @@
 <html>
     <link rel="stylesheet" href="./styles.css">
 
-    <button id="button" onmouseover="MouseLeft()" onmouseout="unMouseLeft()">Left</button>
-    <button id="button" onmouseover="MouseRight()" onmouseout="unMouseRight()">Right</button>
+    <button id="moveButton" onmouseover="MouseLeft()" onmouseout="unMouseLeft()">Left</button>
+    <button id="moveButton" onmouseover="MouseRight()" onmouseout="unMouseRight()">Right</button>
 
     <p id="p1">nothing to see here</p>
 
+    <input type="text" id="key" value="Please enter the device token...">
+    <p>
+    <button class="submitButton" onclick="keyEntry()">enter key</button>
+    </p>
+
+
+
+
     <script>
+    var authKey = ""
+
+        function keyEntry() {
+            
+            if (document.getElementById("key").value !== "**********") {
+                authKey = document.getElementById("key").value
+                document.getElementById("key").value = "**********"
+            }
+        }
 
         function MouseLeft() {
             document.getElementById("p1").innerHTML = "Mouse over left";
@@ -30,7 +47,7 @@
         function sendToCam (pin, value) {
             var request = new XMLHttpRequest();
 
-            var requestAdd = "http://blynk-cloud.com/" + "Fz_G6g9PLEoxASiq9pquOX2g94jty4AJ" + "/update/" + pin + "?value=" + value
+            var requestAdd = "http://blynk-cloud.com/" + authKey + "/update/" + pin + "?value=" + value
 
             request.open('GET', requestAdd);
 
@@ -49,4 +66,3 @@
 
 
 </html>
-
